@@ -6,7 +6,7 @@ public class Chaname extends JavaPlugin{
     Logger log = Logger.getLogger("Minecraft");
     
     public void onEnable() {
-	getServer().getPluginManager().registerEvents(new ChatListener(this), this);
+	getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 	log.info("Chaname enabled.");
     }
 
