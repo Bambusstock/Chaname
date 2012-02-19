@@ -47,6 +47,12 @@ Define the color to highlight the sender.
 
 Define the color to highlight the message.
 
+#### `forceColor` (Default: false)
+
+Use this to force using colors defined in the config.yml. Otherwise if e.g. the
+sender is a admin and his chat color is red, Chaname will keep it by default. Instead
+of DARK_AQUA you get a red sender color.
+
 Permissions
 -----------
 
@@ -73,9 +79,6 @@ TODO:
 - Adding features:
 	- multiple user mentioning
 	- custom format? e.g. "[%sender] tell you: %message"
-	- Configuration
-	    - of cause colors
-	    - send a copy to the sender --> copyTo
 	- Permissions
 	    - send messages
 	    - receive messages
