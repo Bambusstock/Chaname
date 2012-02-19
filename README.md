@@ -16,7 +16,7 @@ After that the receiver will get a message like this:
 
     <SenderName> message
 
-The `<SenderName>` is highlighted with a extra color. The `message` also. Now one except the receiver can see
+The `<SenderName>` is highlighted with a extra color. The `message` also. No one except the receiver can see
 the message.
 
 
@@ -32,13 +32,12 @@ Chaname is using the Configuration API of Bukkit and provide some options to cus
 
 If this is set to true, the sender will get his message as copy, so it's aviable in his chat history.
 
-    copyTo: true
 
 ### Colors
 
 You can define the colors that should be used to highlight the message and the sender.
-_NOTE:_ You can only use colors defined
-by the Bukkit team. See for more information.
+
+__NOTE:__ You can only use colors defined by the Bukkit team. See [ChatColors](http://jd.bukkit.org/apidocs/org/bukkit/ChatColor.html) for more information.
 
 #### `senderColor` (Default: DARK_AQUA)
 
@@ -59,7 +58,7 @@ You can define how is able to use the Chaname through the Permissions API.
 
 Define who could send messages with Chaname.
 
-### `chaname.receive` (Default: true)
+#### `chaname.receive` (Default: true)
 
 Define who could receive messages with Chaname.
 
