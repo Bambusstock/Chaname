@@ -30,7 +30,11 @@ Chaname is using the Configuration API of Bukkit and provide some options to cus
 
 #### `copyTo` (Default: false)
 
-If this is set to true, the sender will get his message as copy, so it's aviable in his chat history.
+If this is set to true, the sender will get his message as copy, so it's available in his chat history.
+
+#### `multiMessage` (Default: true)
+
+True, if a user can send a Message to more than one user.
 
 
 ### Colors
