@@ -16,7 +16,6 @@ public class PlayerListener implements Listener{
     private Chaname 	plugin;
     private Pattern 	pattern = Pattern.compile("@(.*):(.*)");
     private Boolean 	copyTo;
-    private Boolean 	multiMessage;
     private String 	senderColor;
     private String 	messageColor;
     private Boolean 	forceColor;
@@ -29,7 +28,6 @@ public class PlayerListener implements Listener{
 	this.plugin = instance;
 	
 	copyTo 		= this.plugin.getConfig().getBoolean("copyTo");
-	multiMessage	= this.plugin.getConfig().getBoolean("multiMessage");
 	senderColor 	= this.plugin.getConfig().getString("senderColor");
 	messageColor 	= this.plugin.getConfig().getString("messageColor");
 	forceColor 	= this.plugin.getConfig().getBoolean("forceColor");
@@ -81,7 +79,7 @@ public class PlayerListener implements Listener{
 		return;
 	    }
 	    
-	    if(this.multiMessage == true && matcher.group(1).contains(",")) {
+	    if(sender.hasPermission("chaname.mentionMulti") == true && matcher.group(1).contains(",")) {
 		String[] receivers = matcher.group(1).split(",");
 		for(int i = 0; i < receivers.length; i++) {
 		    Player receiver = Bukkit.getPlayer(receivers[i].trim());
@@ -89,7 +87,7 @@ public class PlayerListener implements Listener{
 		}
 		return;
 	    }
-	    else if(this.multiMessage == true && matcher.group(1).contains(",")) {
+	    else if(sender.hasPermission("chaname.mentionMulti") == false && matcher.group(1).contains(",")) {
 		sender.sendMessage(ChatColor.RED + "It's not allowed to send a message to more than one user.");
 		return;
 	    }
