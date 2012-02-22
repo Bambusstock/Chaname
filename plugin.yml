@@ -1,3 +1,15 @@
 name: Chaname
 main: me.Bambusstock.Chaname.Chaname
-version: 0.2
+version: 0.3
+permissions:
+	chaname.*:
+		description: Gives access to all Chaname commands
+		children:
+			chaname.send: true
+			chaname.receive: true
+	chaname.send:
+		description: Allow user to send messages using Chaname
+		default: true
+	chaname.receive:
+		description: Allow user to receive messages using Chaname
+		default: true
