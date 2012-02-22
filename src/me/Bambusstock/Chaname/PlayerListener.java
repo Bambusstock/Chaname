@@ -14,20 +14,34 @@ public class PlayerListener implements Listener{
     Logger log = Logger.getLogger("Minecraft");
     
     private Chaname 	plugin;
+    private Pattern 	pattern = Pattern.compile("@(.*):(.*)");
     private Boolean 	copyTo;
+    private Boolean 	multiMessage;
     private String 	senderColor;
     private String 	messageColor;
     private Boolean 	forceColor;
     
+    /**
+     * Constructor assign configuration.
+     * @param instance
+     */
     public PlayerListener(Chaname instance) {
 	this.plugin = instance;
 	
 	copyTo 		= this.plugin.getConfig().getBoolean("copyTo");
+	multiMessage	= this.plugin.getConfig().getBoolean("multiMessage");
 	senderColor 	= this.plugin.getConfig().getString("senderColor");
 	messageColor 	= this.plugin.getConfig().getString("messageColor");
 	forceColor 	= this.plugin.getConfig().getBoolean("forceColor");
     }
     
+    /**
+     * Sends a message. Uses colors and options.
+     * @param sender 
+     * @param receiver
+     * @param msg
+     * @return Boolean
+     */
     public Boolean sendMessage(Player sender, Player receiver, String msg) {
 	String chatMessage;
 	String copyToMessage;
@@ -49,19 +63,46 @@ public class PlayerListener implements Listener{
 	return false;
     }
     
+    /**
+     * Check if a user mention another.
+     * @param event
+     */
     @EventHandler
-    public void onPlayerChat(PlayerChatEvent event) {	
+    public void onPlayerChat(PlayerChatEvent event) {
 	String msg = event.getMessage();
-	Matcher matcher = Pattern.compile("@(.*):(.*)").matcher(msg);
+	Matcher matcher = this.pattern.matcher(msg);
 	if(matcher.matches() == true && matcher.group(1).isEmpty() == false && matcher.group(2).isEmpty() == false) {
 	    Player sender = event.getPlayer();
-	    Player receiver = Bukkit.getPlayer(matcher.group(1).trim());
 	    String plainMsg = matcher.group(2);
-
-	    if(!sendMessage(sender, receiver, plainMsg)) {
-		sender.sendMessage(ChatColor.RED + "The User '" + matcher.group(1).trim() + "' seems to be offline or doesn't exist. Check spelling. ;)");
-	    }
 	    event.setCancelled(true);
+	    
+	    if(!sender.hasPermission("chaname.send")) {
+		sender.sendMessage(ChatColor.RED + "You don't have the permission to send messages to a user.");
+		return;
+	    }
+	    
+	    if(this.multiMessage == true && matcher.group(1).contains(",")) {
+		String[] receivers = matcher.group(1).split(",");
+		for(int i = 0; i < receivers.length; i++) {
+		    Player receiver = Bukkit.getPlayer(receivers[i].trim());
+		    if(!sendMessage(sender, receiver, plainMsg)) sender.sendMessage(ChatColor.RED + "The User '" + receivers[i].trim() + "' seems to be offline or doesn't exist. Check spelling. ;)");
+		}
+		return;
+	    }
+	    else if(this.multiMessage == true && matcher.group(1).contains(",")) {
+		sender.sendMessage(ChatColor.RED + "It's not allowed to send a message to more than one user.");
+		return;
+	    }
+	    else {
+		Player receiver = Bukkit.getPlayer(matcher.group(1).trim());
+		if(!receiver.hasPermission("chaname.receive")) {
+		    sender.sendMessage(ChatColor.RED + matcher.group(1).trim() + " does not have the permission to receive messages.");
+		    return;
+		}
+		if(!sendMessage(sender, receiver, plainMsg)) sender.sendMessage(ChatColor.RED + "The User '" + matcher.group(1).trim() + "' seems to be offline or doesn't exist. Check spelling. ;)");
+		return;
+	    }
+	    
 	}	
     }
 }

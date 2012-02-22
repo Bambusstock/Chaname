@@ -11,7 +11,7 @@ public class Chaname extends JavaPlugin{
 	this.saveConfig();
 	
 	getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-	log.info("Chaname 0.2 enabled.");
+	log.info("Chaname 0.3 enabled.");
     }
 
     public void onDisable() {

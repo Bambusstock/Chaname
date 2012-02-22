@@ -81,7 +81,6 @@ TODO:
 -----
 
 - Adding features:
-	- multiple user mentioning
 	- custom format? e.g. "[%sender] tell you: %message"
 	- Permissions
 	    - send messages
