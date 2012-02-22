@@ -10,14 +10,16 @@ How does it work?
 
 The player just need to type:
 
-    @receiverName: messages
+    @receiverName: message
 
 After that the receiver will get a message like this:
 
     <SenderName> message
 
 The `<SenderName>` is highlighted with a extra color. The `message` also. No one except the receiver can see
-the message.
+the message. If a player want's to mention more than one user he can type:
+	
+	@receiverName1, receiverName2: message
 
 
 
@@ -31,11 +33,6 @@ Chaname is using the Configuration API of Bukkit and provide some options to cus
 #### `copyTo` (Default: false)
 
 If this is set to true, the sender will get his message as copy, so it's available in his chat history.
-
-#### `multiMessage` (Default: true)
-
-True, if a user can send a Message to more than one user.
-
 
 ### Colors
 
@@ -64,6 +61,10 @@ You can define how is able to use the Chaname through the Permissions API.
 
 ### General
 
+#### `chaname.mentionMulti` (Default: true)
+
+Define if a user could mention more then one user.
+
 #### `chaname.send` (Default: true)
 
 Define who could send messages with Chaname.
@@ -82,6 +83,3 @@ TODO:
 
 - Adding features:
 	- custom format? e.g. "[%sender] tell you: %message"
-	- Permissions
-	    - send messages
-	    - receive messages
