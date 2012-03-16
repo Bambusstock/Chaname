@@ -1,10 +1,7 @@
 name: Chaname
 main: me.Bambusstock.Chaname.Chaname
 description:
-version: 0.3
-name: Chaname
-main: me.Bambusstock.Chaname.Chaname
-version: 0.3
+version: 0.3.1
 permissions:
  chaname.mentionMulti:
    description: Define if a user could mention more then one user.

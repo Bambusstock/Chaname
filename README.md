@@ -12,13 +12,17 @@ The player just need to type:
 
     @receiverName: message
 
+or
+
+    @receiverName message
+
 After that the receiver will get a message like this:
 
     <SenderName> message
 
 The `<SenderName>` is highlighted with a extra color. The `message` also. No one except the receiver can see
 the message. If a player want's to mention more than one user he can type:
-	
+
 	@receiverName1, receiverName2: message
 
 
@@ -63,7 +67,7 @@ You can define how is able to use the Chaname through the Permissions API.
 
 #### `chaname.mentionMulti` (Default: true)
 
-Define if a user could mention more then one user.
+Define if a user could mention more than one user.
 
 #### `chaname.send` (Default: true)
 

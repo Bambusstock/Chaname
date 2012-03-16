@@ -1,5 +1,4 @@
 package me.Bambusstock.Chaname;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,10 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 
 public class PlayerListener implements Listener{    
-    Logger log = Logger.getLogger("Minecraft");
-    
     private Chaname 	plugin;
-    private Pattern 	pattern = Pattern.compile("@(.*):(.*)");
+    private Pattern 	pattern = Pattern.compile("@(.*)[\\s[:]](.*)");
     private Boolean 	copyTo;
     private String 	senderColor;
     private String 	messageColor;
