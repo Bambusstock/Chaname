@@ -2,6 +2,7 @@ package me.Bambusstock.Chaname;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ public class PlayerListener implements Listener{
     private Chaname 	plugin;
     private Pattern 	pattern = Pattern.compile("@(.*)[\\s[:]](.*)");
     private Boolean 	copyTo;
+    private Boolean 	publicMention;
     private String 	senderColor;
     private String 	messageColor;
     private Boolean 	forceColor;
@@ -25,6 +27,7 @@ public class PlayerListener implements Listener{
 	this.plugin = instance;
 	
 	copyTo 		= this.plugin.getConfig().getBoolean("copyTo");
+	publicMention   = this.plugin.getConfig().getBoolean("publicMention");
 	senderColor 	= this.plugin.getConfig().getString("senderColor");
 	messageColor 	= this.plugin.getConfig().getString("messageColor");
 	forceColor 	= this.plugin.getConfig().getBoolean("forceColor");
@@ -51,8 +54,18 @@ public class PlayerListener implements Listener{
 		copyToMessage = ChatColor.valueOf(this.senderColor) + "<" + sender.getDisplayName() + "> -> <" + receiver.getDisplayName() + "> " + ChatColor.valueOf(this.messageColor) + msg.trim();
 	    }
 
+	    if(publicMention == true) {
+		Player[] online = this.plugin.getServer().getOnlinePlayers();
+		if(online != null) {
+        		online = (Player[]) ArrayUtils.removeElement(online, receiver);
+        		for(Player p : online) {
+        		    p.sendMessage("<" + sender.getName() + "> " + msg.trim());
+        		}
+		}
+	    }
 	    receiver.sendMessage(chatMessage);
-	    if(this.copyTo == true) sender.sendMessage(copyToMessage);
+	    
+	    if(this.copyTo == true && publicMention == false) sender.sendMessage(copyToMessage);
 	    return true;
 	}
 	return false;
@@ -90,6 +103,10 @@ public class PlayerListener implements Listener{
 	    }
 	    else {
 		Player receiver = Bukkit.getPlayer(matcher.group(1).trim());
+		if(receiver == null) {
+		    sender.sendMessage(ChatColor.RED + matcher.group(1).trim() + " seems to be offline or doesn't exist. Check spelling. ;).");
+		    return;
+		}
 		if(!receiver.hasPermission("chaname.receive")) {
 		    sender.sendMessage(ChatColor.RED + matcher.group(1).trim() + " does not have the permission to receive messages.");
 		    return;

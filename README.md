@@ -38,6 +38,10 @@ Chaname is using the Configuration API of Bukkit and provide some options to cus
 
 If this is set to true, the sender will get his message as copy, so it's available in his chat history.
 
+#### `publicMention` (Default: false)
+
+If this is set to true, all online players will receive the message. Just the receiver receive a highligthed message.
+
 ### Colors
 
 You can define the colors that should be used to highlight the message and the sender.

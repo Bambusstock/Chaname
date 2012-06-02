@@ -1,4 +1,5 @@
 copyTo: false
+publicMention: false
 
 senderColor: DARK_AQUA
 messageColor: GOLD

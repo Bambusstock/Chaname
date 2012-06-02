@@ -6,7 +6,6 @@ public class Chaname extends JavaPlugin{
 	// Load config
 	this.getConfig().options().copyDefaults(false);
 	this.saveConfig();
-	
 	getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
     }
 
