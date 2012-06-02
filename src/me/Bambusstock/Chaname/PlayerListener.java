@@ -12,7 +12,7 @@ import org.bukkit.event.player.PlayerChatEvent;
 
 public class PlayerListener implements Listener{    
     private Chaname 	plugin;
-    private Pattern 	pattern = Pattern.compile("@(.*)[\\s[:]](.*)");
+    private Pattern 	pattern = Pattern.compile("@(.*)[\\s](.*)");
     private Boolean 	copyTo;
     private Boolean 	publicMention;
     private String 	senderColor;
