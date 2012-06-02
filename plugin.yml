@@ -1,0 +1,14 @@
+name: Chaname
+main: me.Bambusstock.Chaname.Chaname
+description:
+version: 0.3.3
+permissions:
+ chaname.mentionMulti:
+   description: Define if a user could mention more then one user.
+   default: true
+ chaname.send:
+  description: Permission to allow/disallow a user to send messages.
+  default: true
+ chaname.receive:
+  description: Permission to allow/disallow a user to receive messages.
+  default: true
